@@ -51,8 +51,8 @@ def remove_student(student_name, pcp_id):
 
 def add_pcp(name):
     try:
-        db.execute("INSERT INTO pcp(name) VALUES ("+ name+")")
-        db.commit()
+        db.execute("INSERT INTO pcp(name) VALUES ('"+ name+"')")
+        conn.commit()
         return True
     except:
         print("Error: Unable add User")
@@ -61,14 +61,16 @@ def add_pcp(name):
 
 def remove_pcp(pcp_id):
     try:
-        db.execute("DELETE pcp WHERE id = "+pcp_id)
+        db.execute("DELETE FROM pcp WHERE id = '"+pcp_id+"'")
+        conn.commit()
     except:
         print("Error")
 
 
 def get_pcp(pcp_id):
     try:
-        db.execute("SELECT * from pcp where pcp_id=%(id)s",{ 'id': pcp_id} )
+       #db.execute("SELECT * from pcp where pcp_id=%(id)s",{ 'id': pcp_id} )
+        db.execute("SELECT * from pcp where id = " + pcp_id)
         rows = db.fetchall()
         return rows
     except:
@@ -127,8 +129,8 @@ def get_school(s_id):
 
 def add_school( name):
     try:
-        db.execute("INSERT INTO schools(name) VALUES ( "+ name+")")
-        db.commit()
+        db.execute("INSERT INTO schools(name) VALUES ( '"+ name+"')")
+        conn.commit()
         return True
     except:
         print("Error: Unable to add student")
@@ -137,13 +139,14 @@ def add_school( name):
 
 def remove_school(s_id):
     try:
-        db.execute("DELETE pcp WHERE id = "+s_id)
+        db.execute("DELETE FROM pcp WHERE id = "+s_id)
+        conn.commit()
     except:
         print("Error")
 
 def get_events(s_id):
     try:
-        db.execute("SELECT * from schools where school_id=%(id)s",{ 'id': s_id} )
+        db.execute("SELECT * from events where school_id=%(id)s",{ 'id': s_id} )
         rows = db.fetchall()
     except:
         print("Error: Unable to find School")
@@ -153,17 +156,28 @@ def get_events(s_id):
 
 def add_event(name,date,s_id):
     try:
-        db.execute("INSERT INTO event(date, name, school_id) VALUES ("+ date +","+name +","+s_id+")")
-        db.commit()
+        db.execute("INSERT INTO events(date, name, school_id) VALUES ('"+ date +"','"+name +"','"+s_id+"')")
+        conn.commit()
         return True
     except:
-        print("Error: Unable to add student")
+        print("Error: Unable to add event")
         return False
 
 
 def remove_event(s_id):
     try:
-        db.execute("DELETE events WHERE id = "+s_id)
+        db.execute("DELETE FROM events WHERE id = "+s_id)
+        conn.commit()
     except:
         print("Error")
+
+
+def add_assigned(name, date):
+    try:
+       db.execute("INSERT INTO assigned(assigned_name, date_assigned) VALUES ('" + name + "','" + date + "')")
+       conn.commit()
+       return True
+    except:
+       print("Error: Unable to assign care provider")
+       return False
 
