@@ -5,7 +5,6 @@ import psycopg2
 try:
     conn = psycopg2.connect("dbname='base_cover' user='postgres'")
     db = conn.cursor()
-    print("Database connected")
 except:
     print("Oops unable to connect to database")
 
@@ -76,7 +75,6 @@ def get_pcp(pcp_id):
         return rows
     except:
         print("Error: Unable to find Primary Care Provider")
-        return None
 
 
 def get_itp(pcp_id):
