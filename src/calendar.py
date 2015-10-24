@@ -72,20 +72,60 @@ def daysOfWeek(year, week):
    for i in range(0, 5):
       yield day
       day += delta
-   #   yield day
 
+#Prints out all of the days for the week
 def print_week(year, week):
-   #Check if any days off
+   #Store all of the Days & Holidays
+   WeekList = []
+   HolidayDates = []
+   HolidayNames = []
+   AssignedDates = []
+   AssignedNames = []
 
 
    #Print the dates of the week (M-F only)
    for d in daysOfWeek(year, week):
-      print str(d)
+      WeekList.append(d)
+      from database import get_events
+      school_events = get_events("1")
+      for x in range(0, len(school_events)):
+         #There is a day off this week
+         if str(school_events[x][1]) == str(d):
+            HolidayDates.append(d)
+            HolidayNames.append(school_events[x][2])
+      from database import get_all_assigned
+      assigned_dates = get_all_assigned()
+      for i in range(0, len(assigned_dates)):
+         if (str(assigned_dates[i][2]) == str(d)):
+            AssignedDates.append(d)
+            AssignedNames.append(assigned_dates[i][1])
 
-#add_events();
-from database import get_events
-print get_events("1")
-#print test[1]
-#from database import add_school
-#add_school("Westview")
-#print_week(2015, 48)
+   #Replace Holiday into original class list
+   for x in range(0, len(HolidayDates)):
+      #Find spot
+      for i in range(0, len(WeekList)):
+         #Replace
+         if (str(WeekList[i]) == str(HolidayDates[x])):
+            WeekList[i] = str(HolidayDates[x]) + " School Closed -   " + str(HolidayNames[x]) + "  COVERED BY -  "
+            #Check assigned
+            for j in range (0, len(AssignedDates)):
+               if (str(HolidayDates[x])) == (str(AssignedDates[j])):
+                 # WeekList[i] = WeekList[i] + " COVERED BY - "
+                 WeekList[i] = WeekList[i] + AssignedNames[j]
+                  
+   #Print the entire week out (M-F only)
+   for x in range(0, len(WeekList)):
+      print WeekList[x]      
+
+       
+print_week(2015, 44)
+ 
+#Prints out all of the days off for that specific school
+def print_school():
+   from database import get_events
+   school_events = get_events("1")
+   for x in range(0, len(school_events)):
+       print str(school_events[x][1]) + " " + school_events[x][2]
+
+#from database import add_assigned
+#add_assigned("Rob", "10-30-15")
