@@ -71,7 +71,7 @@ def get_pcp(pcp_id):
     try:
        #db.execute("SELECT * from pcp where pcp_id=%(id)s",{ 'id': pcp_id} )
         db.execute("SELECT * from pcp where id = " + pcp_id)
-        rows = db.fetchall()
+        rows = db.fetchone()
         return rows
     except:
         print("Error: Unable to find Primary Care Provider")
@@ -125,6 +125,14 @@ def get_school(s_id):
         return None
 
     return rows
+
+def get_all_school():
+    try:
+        db.execute("SELECT * from schools")
+        rows = db.fetchall()
+        return rows
+    except:
+        print("Error: Unable to find School")
 
 def add_school( name):
     try:
@@ -193,4 +201,10 @@ def remove_assigned(name, date):
         db.execute("DELETE events WHERE assigned_name = %(name)s AND date_assigned =%(date)s",{'name':name, 'date':date})
     except:
         print("Error")
+
+
+def close():
+    if conn :
+        conn.close
+
 

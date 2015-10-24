@@ -22,16 +22,21 @@ def WelcomeScreen():
    if (choice == "show_curr_week"):
       #2015, 48 (Thanksgiving week)
       print_week(2015, 48)
-      return None
+      return True
    elif(choice == "show_next_week"):
       print_week(2015,49)
    elif (choice == "assign"):
       #Allows the PCP to assign a provider to their child on the
       #day given off, either themself of an ITP
       add_assign()
-      return None
-   elif choice =="quit":
+      return True
+   elif choice == "school":
+#       view_school()
        return True
+   elif choice =="quit":
+       return False
+
+
 
 
 #Assign care provider to day off
