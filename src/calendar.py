@@ -67,15 +67,13 @@ def daysOfWeek(year, week):
 
 def print_week(year, week):
    #Check if any days off
-   
+    
 
    #Print the dates of the week (M-F only)
    for d in daysOfWeek(year, week):
       print str(d)
 
 #add_events();
-from database import check_event
-print check_event("1", "2015-10-30")
 from database import get_events
 print get_events("1")
 #print test[1]

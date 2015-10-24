@@ -5,6 +5,7 @@ import psycopg2
 try:
     conn = psycopg2.connect("dbname='base_cover' user='postgres'")
     db = conn.cursor()
+    print("Database connected")
 except:
     print("Oops unable to connect to database")
 
@@ -180,4 +181,18 @@ def add_assigned(name, date):
     except:
        print("Error: Unable to assign care provider")
        return False
+def get_assigned(start_date, end_date):
+    try:
+        db.execute("SELECT * FROM assigned where date_assigned >= %(start)s and date_assigned <= %(end)s")
+        rows = db.fetchall()
+        return rows
+    except:
+        print("Unable to obtain data")
+        return None
+
+def remove_assigned(name, date):
+    try:
+        db.execute("DELETE events WHERE assigned_name = %(name)s AND date_assigned =%(date)s",{'name':name, 'date':date})
+    except:
+        print("Error")
 
