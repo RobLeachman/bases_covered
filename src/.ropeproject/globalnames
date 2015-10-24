@@ -1,13 +1,13 @@
-€}q(Ucalendar]q(U
-add_eventsqU
-add_assignqU
-daysOfWeekqUEventsqUAssignedqU
-print_weekqUWelcomeScreenq	eU
-base_cover]q
-U
-scriptpathqaUdatabase]q(Uremove_assignedqU
-add_schoolqU
-get_eventsqUadd_assignedqUadd_pcpqUdbqU
-get_schoolqUadd_studentqUget_studentqUremove_schoolqU	add_eventqUconnqUget_assignedqUremove_eventqU
-remove_itpqUget_itpqUadd_itpqU
-remove_pcpqUremove_studentqUget_pcpq eu.
+€}q(Ucalendar]q(Uprint_schoolqU
+add_eventsqU
+add_assignqU
+daysOfWeekqUEventsqUAssignedqU
+print_weekq	UWelcomeScreenq
+eU
+base_cover]q(Uinit_appqUpcp_rowqU
+scriptpathqUu_idqeUdatabase]q(U
+add_schoolqUadd_assignedqUget_studentqUget_assignedqUcloseqUremove_eventqU
+remove_itpqUconnqUremove_assignedqUget_all_schoolqUadd_studentqUget_all_assignedqUget_itpqUdbqU
+get_schoolqUadd_itpq Uremove_studentq!Uget_pcpq"Uadd_pcpq#U
+remove_pcpq$U
+get_eventsq%U	add_eventq&Uremove_schoolq'eu.

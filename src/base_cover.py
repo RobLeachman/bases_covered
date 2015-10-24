@@ -15,8 +15,8 @@ def init_app(row, id):
 print("Welcome to Base Covered\n")
 
 print("Commands:")
-print("show_curr_week                                    ---Display current week")
-print("show_next_week                                    ---Similar but display next week")
+print("show_week                                    ---Display current week")
+#print("show_next_week                                    ---Similar but display next week")
 print("assign                                            ---Assign a person")
 #print("school                                            ---Display school events")
 print("quit                                              ---Quit")

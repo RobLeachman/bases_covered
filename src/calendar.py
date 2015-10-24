@@ -21,7 +21,8 @@ def WelcomeScreen():
    choice = raw_input("Please enter a command:")
    if (choice == "show_curr_week"):
       #2015, 48 (Thanksgiving week)
-      print_week(2015, 48)
+      #print_week(2015, 48)
+      print_week(2015, 44)
       return True
    elif(choice == "show_next_week"):
       print_week(2015,49)
@@ -31,7 +32,6 @@ def WelcomeScreen():
       add_assign()
       return True
    elif choice == "school":
-#       view_school()
        return True
    elif choice =="quit":
        return False
@@ -43,7 +43,7 @@ def WelcomeScreen():
 def add_assign():
    #Input
    covername = raw_input("Enter name of the care provider: ")
-   coverdate = raw_input("Enter date of day they will cover: ")
+   coverdate = raw_input("Enter date of day they will cover(MM-DD-YYYY): ")
 
    #Add to the database
    from database import add_assigned
@@ -106,20 +106,21 @@ def print_week(year, week):
       for i in range(0, len(WeekList)):
          #Replace
          if (str(WeekList[i]) == str(HolidayDates[x])):
-            WeekList[i] = str(HolidayDates[x]) + " School Closed -   " + str(HolidayNames[x]) + "  COVERED BY -  "
+            WeekList[i] = str(HolidayDates[x]) + " School Closed -   " + str(HolidayNames[x]) + "  covered by - ***NOBODY***  "
             #Check assigned
             for j in range (0, len(AssignedDates)):
                if (str(HolidayDates[x])) == (str(AssignedDates[j])):
-                 # WeekList[i] = WeekList[i] + " COVERED BY - "
+                 WeekList[i] = WeekList[i].strip(" covered by - ***NOBODY***")
+                 WeekList[i] = WeekList[i] + " covered by - "
                  WeekList[i] = WeekList[i] + AssignedNames[j]
-                  
+
    #Print the entire week out (M-F only)
    for x in range(0, len(WeekList)):
-      print WeekList[x]      
+      print WeekList[x]
 
-       
+
 print_week(2015, 44)
- 
+
 #Prints out all of the days off for that specific school
 def print_school():
    from database import get_events
