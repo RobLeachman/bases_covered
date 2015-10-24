@@ -5,6 +5,7 @@ import psycopg2
 try:
     conn = psycopg2.connect("dbname='base_cover' user='postgres'")
     db = conn.cursor()
+    print("Database connected")
 except:
     print("Oops unable to connect to database")
 
@@ -166,4 +167,29 @@ def remove_event(s_id):
         db.execute("DELETE events WHERE id = "+s_id)
     except:
         print("Error")
+
+def get_assigned(start_date, end_date):
+    try:
+        db.execute("SELECT * FROM assigned where date_assigned >= %(start)s and date_assigned <= %(end)s")
+        rows = db.fetchall()
+        return rows
+    except:
+        print("Unable to obtain data")
+        return None
+
+def add_assigned(name, date):
+    try:
+        db.execute("INSERT INTO assigned(name,date) VALUES ("+ name+","+date +")")
+        db.commit()
+        return True
+    except:
+        print("Unable to Assigned the Individual")
+        return False
+
+def remove_assigned(name, date):
+    try:
+        db.execute("DELETE events WHERE assigned_name = %(name)s AND date_assigned =%(date)s",{'name':name, 'date':date})
+    except:
+        print("Error")
+
 
