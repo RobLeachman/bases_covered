@@ -183,7 +183,16 @@ def add_assigned(name, date):
        return False
 def get_assigned(start_date, end_date):
     try:
-        db.execute("SELECT * FROM assigned where date_assigned >= %(start)s and date_assigned <= %(end)s")
+        db.execute("SELECT * FROM assigned where date_assigned >= %(start)s and date_assigned <= %(end)s",{ 'start':start_date, 'end':end_date})
+        rows = db.fetchall()
+        return rows
+    except:
+        print("Unable to obtain data")
+        return None
+
+def get_all_assigned():
+    try:
+        db.execute("SELECT * FROM assigned")
         rows = db.fetchall()
         return rows
     except:
