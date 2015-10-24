@@ -14,28 +14,32 @@ class Assigned:
       self.covered = cover
       self.name = covername
       self.date = dates
-   
+
 
 #Prints out the welcome screen and gives options
 def WelcomeScreen():
-   print "Welcome to Bases Covered"
-   choice = raw_input("Please pick one of the following choices below")
-   print "1. Show the current week"
-   print "2. Assign a care provider"
-   if (choice == 1):
+   choice = raw_input("Please enter a command:")
+   if (choice == "show_curr_week"):
       #2015, 48 (Thanksgiving week)
       print_week(2015, 48)
-   if (choice == 2):
+      return None
+   elif(choice == "show_next_week"):
+      print_week(2015,49)
+   elif (choice == "assign"):
       #Allows the PCP to assign a provider to their child on the
       #day given off, either themself of an ITP
-      add_assign() 
+      add_assign()
+      return None
+   elif choice =="quit":
+       return True
+
 
 #Assign care provider to day off
 def add_assign():
-   #Input   
+   #Input
    covername = raw_input("Enter name of the care provider: ")
    coverdate = raw_input("Enter date of day they will cover: ")
-   
+
    #Add to the database
    from database import add_assigned
    add_assigned(covername, coverdate)
@@ -67,7 +71,7 @@ def daysOfWeek(year, week):
 
 def print_week(year, week):
    #Check if any days off
-    
+
 
    #Print the dates of the week (M-F only)
    for d in daysOfWeek(year, week):
